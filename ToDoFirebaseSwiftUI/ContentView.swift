@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var appStateVM = AppStateViewModel()
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        if appStateVM.isSignedIn {
+            ListView().environmentObject(appStateVM)
         }
-        .padding()
+        else {
+            LoginView().environmentObject(appStateVM)
+        }
     }
 }
 
